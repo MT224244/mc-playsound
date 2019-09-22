@@ -1,0 +1,51 @@
+{
+    "name": "mc-playsound",
+    "version": "1.0.0",
+	"repository": "https://github.com/MT224244/mc-playsound",
+    "main": "dist/main/main.js",
+    "scripts": {
+        "start": "electron .",
+        "start:debug": "gulp electron-start",
+        "dist": "gulp",
+        "watch": "gulp && gulp watch",
+        "liclist": "gulp liclist",
+        "build": "electron-builder --win --x64"
+    },
+    "author": "MT224244",
+    "license": "MIT",
+    "dependencies": {
+        "electron-store": "^5.0.0",
+        "jquery": "^3.4.1",
+        "linq": "^3.2.1",
+        "material-components-web": "^3.2.0"
+    },
+    "devDependencies": {
+        "electron": "^6.0.10",
+        "electron-builder": "^21.2.0",
+        "electron-connect": "^0.6.3",
+        "gulp": "^4.0.2",
+        "gulp-plumber": "^1.2.1",
+        "gulp-pug": "^4.0.1",
+        "gulp-sass": "^4.0.2",
+        "gulp-typescript": "^5.0.1",
+        "license-checker": "^25.0.1",
+        "typescript": "^3.6.3",
+        "webpack": "^4.40.2",
+        "webpack-stream": "^5.2.1"
+    },
+    "build": {
+        "productName": "MC Playsound",
+        "appId": "com.mt224244.mcplaysound",
+        "directories": {
+            "output": "build"
+        },
+        "files": [
+            "package.json",
+            "dist/**/*"
+        ],
+        "win": {
+            "icon": "dist/renderer/resource/icon.ico",
+            "target": "zip"
+        }
+    }
+}

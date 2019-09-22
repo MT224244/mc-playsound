@@ -1,0 +1,37 @@
+#dialog-info.mdc-dialog(role="alertdialog", aria-modal="true")
+        .mdc-dialog__container
+            .mdc-dialog__surface
+                h1.mdc-dialog__title.mdc-typography--headline5 Information
+                .mdc-dialog__content
+                    p
+                        | Version: 
+                        span#version
+                        br
+                        | Author: 
+                        span#author
+                        br
+                        | License: 
+                        span#license
+                        br
+                        | Repository: 
+                        span#repository
+
+                    p
+                        | Node.js: 
+                        span#nodejs-version
+                        br
+                        | Electron: 
+                        span#electron-version
+                        br
+                        | Chrome: 
+                        span#chrome-version
+                        br
+                        | V8: 
+                        span#v8-version
+
+                    h2.mdc-typography--headline6 Third Party Modules
+                    ul#list-licenses.mdc-list.mdc-list--two-line(role="listbox")
+                footer.mdc-dialog__actions
+                    button.mdc-button(type="button", data-mdc-dialog-action="ok")
+                        span.mdc-button__label OK
+        .mdc-dialog__scrim

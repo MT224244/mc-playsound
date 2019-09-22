@@ -1,0 +1,28 @@
+@mixin textfield {
+    width: 100%;
+    height: 35px;
+    .mdc-text-field__input {
+        color: rgba($color: #fff, $alpha: 1.0);
+        padding-bottom: 10px;
+    }
+    .mdc-floating-label {
+        color: rgba($color: #fff, $alpha: 0.7);
+    }
+    .mdc-notched-outline div {
+        border-color: rgba($color: #fff, $alpha: 0.5);
+        label.mdc-floating-label {
+            top: 8px;
+            &.mdc-floating-label--float-above {
+                transform: translateY(-75%) scale(0.75);
+            }
+        }
+    }
+    &.mdc-text-field--focused .mdc-notched-outline div {
+        border-color: rgba($color: #fff, $alpha: 1.0);
+    }
+}
+
+@mixin button-base {
+    text-transform: none;
+    border: 1px solid rgba($color: #fff, $alpha: 0.5);
+}

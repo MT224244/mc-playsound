@@ -1,0 +1,176 @@
+@import 'base';
+
+@import 'info_dialog';
+@import 'settings_dialog';
+
+// バージョン選択メニュー
+#select-version__menu {
+    width: 100%;
+    max-height: 50vh !important;
+    background-color: rgba($color: #121212, $alpha: 0.8);
+    li {
+        color: #fff;
+        &:hover {
+            background-color: rgba($color: #fff, $alpha: 0.2);
+        }
+    }
+}
+
+// スクロールバー
+::-webkit-scrollbar {
+    width: 15px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 15px;
+  background-color: rgba($color: #121212, $alpha: 0.5)
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba($color: #fff, $alpha: 1.0);
+  border-radius: 15px;
+  height: 30px;
+}
+
+#body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: calc(100vh - 30px) !important;
+    padding: 15px;
+    box-sizing: border-box;
+    // 検索
+    #search {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        // バージョン選択
+        #select-version {
+            width: 100%;
+            height: 35px;
+            margin-bottom: 10px;
+            .mdc-select__dropdown-icon {
+                bottom: 6px;
+                background: {
+                    image: url(../resource/select_arrow.svg);
+                    size: 10px;
+                }
+            }
+            &.mdc-select--activated .mdc-select__dropdown-icon {
+                transform: rotate(180deg) translateY(-1px);
+            }
+            .mdc-select__selected-text {
+                color: #fff;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                height: 35px;
+            }
+            .mdc-floating-label {
+                color: rgba($color: #fff, $alpha: 0.7);
+            }
+            .mdc-notched-outline div {
+                border-color: rgba($color: #fff, $alpha: 0.5);
+                label.mdc-floating-label {
+                    top: 8px;
+                    &.mdc-floating-label--float-above {
+                        transform: translateY(-75%) scale(0.75);
+                    }
+                }
+            }
+            &.mdc-select--focused .mdc-notched-outline div {
+                border-color: rgba($color: #fff, $alpha: 1.0);
+            }
+        }
+        #textfield-search {
+            @include textfield;
+        }
+    }
+    // サウンドリスト
+    #sound-list {
+        height: calc(100% - 20px);
+        margin-bottom: 10px;
+        border: 1px solid rgba($color: #fff, $alpha: 0.5);
+        border-radius: 5px;
+        #list-sounds {
+            height: 100%;
+            overflow-y: auto;
+            padding: 0;
+            .mdc-list-item {
+                height: 50px;
+                user-select: none;
+                .mdc-list-item__primary-text {
+                    color: #fff;
+                    &::before {
+                        height: 22px;
+                    }
+                }
+                .mdc-list-item__secondary-text {
+                    color: rgba($color: #fff, $alpha: 0.3);
+                }
+            }
+        }
+    }
+    // コントローラー
+    #controller {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        min-height: 80px;
+        margin-bottom: 10px;
+        &>div {
+            margin: 0 20px;
+            &>label {
+                color: #fff;
+            }
+            &>p {
+                color: rgba($color: #fff, $alpha: 0.5);
+                margin: 0;
+            }
+        }
+        .mdc-slider {
+            height: 30px;
+            .mdc-slider__track-container {
+                background-color: rgba($color: #121212, $alpha: 0.7);
+                .mdc-slider__track {
+                    background-color: rgba($color: #fff, $alpha: 0.5);
+                }
+            }
+            .mdc-slider__thumb-container {
+                top: 3px;
+                left: -2px;
+            }
+            .mdc-slider__thumb {
+                width: 25px;
+                height: 25px;
+                background: {
+                    image: url(../resource/slider_thumb.svg);
+                    size: 25px;
+                }
+            }
+        }
+        // ボリュームバー
+        #volumebar {
+            flex-grow: 1;
+            text-align: center;
+        }
+        // ピッチバー
+        #pitchbar {
+            flex-grow: 1;
+            text-align: center;
+        }
+        // ループスイッチ
+        #loopswitch {
+            flex-shrink: 1;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            .mdc-switch {
+                margin: 8px auto 0 auto;
+            }
+        }
+    }
+    // 再生ボタン
+    #btn-play {
+        @include button-base;
+        width: 100%;
+        height: 60px;
+    }
+}

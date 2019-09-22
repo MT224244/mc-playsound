@@ -1,0 +1,30 @@
+doctype html
+html(lang="ja")
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        meta(http-equiv="Content-Security-Policy", content="img-src * 'self' data:; default-src 'self'; style-src 'self' 'unsafe-inline';")
+        link(rel="stylesheet", href="../../../node_modules/material-components-web/dist/material-components-web.min.css")
+        block styles
+    body
+        #wrapper
+            #titlebar
+                h1#title.mdc-typography--subtitle2
+                #titlebar-buttons
+                    block titlebar_buttons
+                    if (isMinimize)
+                        button#btn-minimize.mdc-button
+                    if (isMaximize)
+                        button#btn-maximize.mdc-button
+                    if (isClose)
+                        button#btn-close.mdc-button
+
+            #body
+                block body
+
+            #dialogs
+                block dialogs
+        script(src="../../../node_modules/jquery/dist/jquery.min.js")
+        script(src="../../../node_modules/material-components-web/dist/material-components-web.min.js")
+        block scripts
