@@ -1,5 +1,3 @@
-//@ts-check
-
 import $ from 'jquery';
 import { shell } from 'electron';
 import { MDCDialog } from '@material/dialog';
@@ -7,21 +5,29 @@ import { MDCList } from '@material/list';
 import { MDCRipple } from '@material/ripple';
 import { readFileSync } from 'fs';
 
-/** @type {MDCDialog} */
-let dialogInfo;
+type Package = {
+    name: string,
+    version: string,
+    author: string,
+    license: string,
+    repository: string
+};
 
-/** @type {MDCList} */
-let listLicenses;
+type Licenses = {
+    [key: string]: {
+        licenses: string,
+        repository: string
+    }
+};
 
-$(document).ready(() => {
-    dialogInfo = new MDCDialog($('#dialog-info').get(0));
-    listLicenses = new MDCList($('#list-licenses').get(0));
+const dialogInfo = new MDCDialog($('#dialog-info').get(0));
+const listLicenses = new MDCList($('#list-licenses').get(0));
 
+const main = () => {
     dialogInfo.scrimClickAction = '';
     dialogInfo.escapeKeyAction = '';
 
-    /** @type {{name: string, version: string, author: string, license: string, repository: string}} */
-    let pkg;
+    let pkg: Package;
     try { pkg = JSON.parse(readFileSync('resources/app.asar/package.json', 'utf8')); }
     catch { pkg = JSON.parse(readFileSync('package.json', 'utf8')); }
 
@@ -39,19 +45,15 @@ $(document).ready(() => {
 
     $('#btn-info').on('click', () => dialogInfo.open());
 
-    /** @type {{}} */
-    let licenses;
+    let licenses: Licenses;
     try { licenses = JSON.parse(readFileSync('resources/app.asar/dist/renderer/resource/licenses.json', 'utf8')); }
     catch { licenses = JSON.parse(readFileSync('dist/renderer/resource/licenses.json', 'utf8')); }
 
-    /** @type {string[]} */
-    let elems = [];
+    let elems: string[] = [];
 
     Object.keys(licenses).forEach(key => {
-        /** @type {string} */
-        let lic = licenses[key].licenses;
-        /** @type {string} */
-        const repository = licenses[key].repository;
+        let lic: string = licenses[key].licenses;
+        const repository: string = licenses[key].repository as string;
 
         if (!lic.startsWith('(')) lic = `(${lic})`;
 
@@ -70,11 +72,11 @@ $(document).ready(() => {
     listLicenses.listen('click', () => {
         if (typeof listLicenses.selectedIndex !== 'number') return;
 
-        /** @type {string} */
-        const url = $(listLicenses.listElements[listLicenses.selectedIndex]).data('value');
+        const url: string = $(listLicenses.listElements[listLicenses.selectedIndex]).data('value');
 
-        console.log(listLicenses.selectedIndex);
         shell.openExternal(url);
         $(listLicenses.listElements[listLicenses.selectedIndex]).removeClass('mdc-list-item--selected');
     });
-});
+};
+
+main();

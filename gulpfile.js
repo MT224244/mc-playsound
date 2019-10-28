@@ -28,7 +28,7 @@ const config = {
         opt: { outputStyle: 'compressed' }
     },
     webpack: {
-        src: 'src/renderer/js',
+        src: 'src/renderer/ts',
         dist: 'dist/renderer/js'
     },
     copy: {

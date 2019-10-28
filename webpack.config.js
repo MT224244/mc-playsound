@@ -1,7 +1,20 @@
+const path = require('path');
+
 module.exports = {
     target: 'electron-renderer',
     mode: 'production',
-    entry: { 'main': './src/renderer/js/main.js' },
+    entry: { 'main': './src/renderer/ts/main.ts' },
     output: { filename: '[name].js' },
-    externals: ['spawn-sync', 'utf-8-validate', 'bufferutil']
+    module: {
+        rules: [
+            {
+                test: /\.ts$/,
+                use: "ts-loader"
+            }
+        ]
+    },
+    resolve: {
+        extensions: [ '.ts', '.js' ],
+        modules: [path.resolve(__dirname, "src/renderer/ts"), "node_modules"]
+    }
 }

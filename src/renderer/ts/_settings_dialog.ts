@@ -1,5 +1,3 @@
-//@ts-check
-
 import $ from 'jquery';
 import { ipcRenderer } from 'electron';
 import { MDCDialog } from '@material/dialog';
@@ -8,16 +6,10 @@ import Config from 'electron-store';
 
 const mcdir = new Config().get('mcdir');
 
-/** @type {MDCDialog} */
-let dialogSettings;
+const dialogSettings = new MDCDialog($('#dialog-settings').get(0));
+const textfieldMcpath = new MDCTextField($('#textfield-mcpath').get(0));
 
-/** @type {MDCTextField} */
-let textfieldMcpath;
-
-$(document).ready(() => {
-    dialogSettings = new MDCDialog($('#dialog-settings').get(0));
-    textfieldMcpath = new MDCTextField($('#textfield-mcpath').get(0));
-    
+const main = () => {
     dialogSettings.scrimClickAction = '';
     dialogSettings.escapeKeyAction = '';
     dialogSettings.listen('MDCDialog:closed', (e) => {
@@ -33,10 +25,11 @@ $(document).ready(() => {
     });
 
     $('#btn-pickdir').on('click', () => {
-        /** @type {string} */
-        const path = ipcRenderer.sendSync('onDirPick');
+        const path: string = ipcRenderer.sendSync('onDirPick');
         if (path) {
             textfieldMcpath.value = path;
         }
     });
-});
+};
+
+main();

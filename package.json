@@ -1,7 +1,7 @@
 {
     "name": "mc-playsound",
-    "version": "1.0.0",
-	"repository": "https://github.com/MT224244/mc-playsound",
+    "version": "1.0.1",
+    "repository": "https://github.com/MT224244/mc-playsound",
     "main": "dist/main/main.js",
     "scripts": {
         "start": "electron .",
@@ -20,6 +20,7 @@
         "material-components-web": "^3.2.0"
     },
     "devDependencies": {
+        "@types/jquery": "^3.3.31",
         "electron": "^6.0.10",
         "electron-builder": "^21.2.0",
         "electron-connect": "^0.6.3",
@@ -29,6 +30,7 @@
         "gulp-sass": "^4.0.2",
         "gulp-typescript": "^5.0.1",
         "license-checker": "^25.0.1",
+        "ts-loader": "^6.2.0",
         "typescript": "^3.6.3",
         "webpack": "^4.40.2",
         "webpack-stream": "^5.2.1"
