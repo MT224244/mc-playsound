@@ -21,7 +21,7 @@
     },
     "devDependencies": {
         "@types/jquery": "^3.3.31",
-        "electron": "^7.2.4",
+        "electron": "^9.4.0",
         "electron-builder": "^21.2.0",
         "electron-connect": "^0.6.3",
         "gulp": "^4.0.2",
