@@ -11,6 +11,7 @@ module.exports = {
                 appId: 'com.mt224244.mc-playsound',
                 productName: 'MC Playsound',
                 win: {
+                    icon: 'public/icon.ico',
                     target: [
                         'zip',
                         'nsis'
