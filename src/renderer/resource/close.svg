@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" height="512" width="512">
-    <g stroke="#fff" stroke-width="50" stroke-linecap="round" transform="scale(0.9) translate(27,27)">
-        <line x1="0" y1="0" x2="512" y2="512"/>
-        <line x1="512" y1="0" x2="0" y2="512"/>
-    </g>
-</svg>
