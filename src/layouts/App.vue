@@ -6,22 +6,16 @@
 
             <q-space/>
 
-            <q-btn
-                flat
+            <SystemButton
                 icon="mdi-window-minimize"
-                class="sys-btn full-height"
                 @click="btnMinimize_onClick"
             />
-            <q-btn
-                flat
+            <SystemButton
                 :icon="isMaximize ? 'mdi-window-restore' : 'mdi-window-maximize'"
-                class="sys-btn full-height"
                 @click="btnMaximize_onClick"
             />
-            <q-btn
-                flat
+            <SystemButton
                 icon="mdi-window-close"
-                class="sys-btn full-height"
                 @click="btnClose_onClick"
             />
         </q-bar>
@@ -40,10 +34,12 @@ import { IpcRenderer } from '@/renderer/IpcRenderer';
 import { version } from '../../package.json';
 
 import Home from '@/views/Home.vue';
+import SystemButton from '@/components/SystemButton.vue';
 
 @Component({
     components: {
-        Home
+        Home,
+        SystemButton
     },
     data: () => ({
         version
@@ -74,6 +70,12 @@ export default class App extends Vue {
 }
 </script>
 
+<style lang="scss">
+html, body {
+    overflow: hidden;
+}
+</style>
+
 <style lang="scss" scoped>
 .titlebar {
     height: 25px;
@@ -85,16 +87,6 @@ export default class App extends Vue {
         top: 3px;
         width: 100%;
         height: 22px;
-    }
-    .sys-btn {
-        border-radius: 0 !important;
-        margin-left: 0 !important;
-        ::v-deep.q-btn__wrapper {
-            -webkit-app-region: no-drag;
-            max-height: 25px;
-            min-height: 0;
-            padding: 0 10px;
-        }
     }
 }
 .content {
