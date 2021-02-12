@@ -6,7 +6,17 @@ module.exports = {
         },
         electronBuilder: {
             nodeIntegration: true,
-            mainProcessFile: 'src/main/background.ts'
+            mainProcessFile: 'src/main/background.ts',
+            builderOptions: {
+                appId: 'com.mt224244.mc-playsound',
+                productName: 'MC Playsound',
+                win: {
+                    target: [
+                        'zip',
+                        'nsis'
+                    ]
+                }
+            }
         }
     },
     pages: {
