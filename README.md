@@ -8,7 +8,7 @@ This application is play sound resources used in Minecraft.
 
 ## License
 
-[MIT](License)
+[MIT][License]
 
 <!-- Links -->
 
