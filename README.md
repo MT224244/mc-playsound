@@ -4,7 +4,7 @@
 <!-- [![CI_Badge][]][CI] -->
 <!-- ![Version_Badge][] -->
 
-This application is play sound resources used in Minecraft.
+This application play sound used in Minecraft.
 
 ## License
 
