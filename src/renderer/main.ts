@@ -2,7 +2,7 @@ import Vue from 'vue';
 
 import '@/plugins/quasar';
 
-import App from '@/layouts/App.vue';
+import { App } from '@/layouts/App';
 
 Vue.config.productionTip = false;
 

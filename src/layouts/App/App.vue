@@ -7,6 +7,15 @@
             <q-space/>
 
             <SystemButton
+                icon="mdi-settings"
+                tooltip="Settings &amp; Information"
+                :color="isSettingsDialogOpen ? 'grey-7' : undefined"
+                @click="isSettingsDialogOpen = !isSettingsDialogOpen"
+            />
+
+            <q-separator vertical class="q-mx-xs q-my-xs"/>
+
+            <SystemButton
                 icon="mdi-window-minimize"
                 @click="btnMinimize_onClick"
             />
@@ -23,6 +32,8 @@
         <q-page-container class="fixed-bottom content">
             <Home class="full-height"/>
         </q-page-container>
+
+        <SettingsDialog v-model="isSettingsDialogOpen"/>
     </q-layout>
 </template>
 
@@ -31,15 +42,17 @@ import { Component, Vue } from 'vue-property-decorator';
 
 import { IpcRenderer } from '@/renderer/IpcRenderer';
 
-import { version } from '../../package.json';
+import { version } from '../../../package.json';
 
-import Home from '@/views/Home.vue';
-import SystemButton from '@/components/SystemButton.vue';
+import { Home } from '@/views/Home';
+import { SystemButton } from '@/components/SystemButton';
+import { SettingsDialog } from '@/components/SettingsDialog';
 
 @Component({
     components: {
         Home,
-        SystemButton
+        SystemButton,
+        SettingsDialog
     },
     data: () => ({
         version
@@ -49,6 +62,8 @@ export default class App extends Vue {
     public title = 'MC Playsound';
 
     public isMaximize = false;
+
+    public isSettingsDialogOpen = false;
 
     public mounted() {
         IpcRenderer.On('maximize', (_, isMaximize) => {
