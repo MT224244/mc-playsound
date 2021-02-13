@@ -8,7 +8,7 @@
 
             <SystemButton
                 icon="mdi-settings"
-                tooltip="Settings &amp; Information"
+                tooltip="Settings"
                 :color="isSettingsDialogOpen ? 'grey-7' : undefined"
                 @click="isSettingsDialogOpen = !isSettingsDialogOpen"
             />

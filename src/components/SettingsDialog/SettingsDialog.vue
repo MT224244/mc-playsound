@@ -39,7 +39,7 @@
                             :breakpoint="0"
                             v-model="selectedTab"
                         >
-                            <q-tab name="information" label="Information" icon="mdi-information-outline"/>
+                            <q-tab name="information" label="About" icon="mdi-information-outline"/>
                             <q-tab name="licenses" label="Licenses" icon="mdi-format-list-bulleted"/>
                         </q-tabs>
                     </div>
@@ -56,7 +56,7 @@
                             <SettingsTab/>
                         </q-tab-panel>
                         <q-tab-panel name="information">
-                            <InformationTab/>
+                            <AboutTab/>
                         </q-tab-panel>
                         <q-tab-panel name="licenses">
                             <LicensesTab/>
@@ -72,7 +72,7 @@
 import { Component, PropSync, Vue } from 'vue-property-decorator';
 
 import SettingsTab from '@/components/SettingsDialog/tabs/SettingsTab.vue';
-import InformationTab from '@/components/SettingsDialog/tabs/InformationTab.vue';
+import AboutTab from '@/components/SettingsDialog/tabs/AboutTab.vue';
 import LicensesTab from '@/components/SettingsDialog/tabs/LicensesTab.vue';
 
 type TabName =
@@ -83,7 +83,7 @@ type TabName =
 @Component({
     components: {
         SettingsTab,
-        InformationTab,
+        AboutTab,
         LicensesTab
     }
 })

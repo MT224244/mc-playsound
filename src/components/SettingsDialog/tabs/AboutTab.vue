@@ -1,6 +1,6 @@
 <template>
     <div>
-        Information
+        About
     </div>
 </template>
 
@@ -8,5 +8,5 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class InformationTab extends Vue {}
+export default class AboutTab extends Vue {}
 </script>
