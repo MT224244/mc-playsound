@@ -7,7 +7,7 @@
             <q-space/>
 
             <SystemButton
-                icon="mdi-settings"
+                icon="mdi-cog"
                 tooltip="Settings"
                 :color="isSettingsDialogOpen ? 'grey-7' : undefined"
                 @click="isSettingsDialogOpen = !isSettingsDialogOpen"

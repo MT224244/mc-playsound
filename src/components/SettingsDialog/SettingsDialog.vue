@@ -27,7 +27,7 @@
                             :breakpoint="0"
                             v-model="selectedTab"
                         >
-                            <q-tab name="settings" label="Settings" icon="mdi-settings"/>
+                            <q-tab name="settings" label="Settings" icon="mdi-cog"/>
                         </q-tabs>
                         <q-space/>
                         <q-tabs
@@ -71,9 +71,9 @@
 <script lang="ts">
 import { Component, PropSync, Vue } from 'vue-property-decorator';
 
-import SettingsTab from '@/components/SettingsDialog/tabs/SettingsTab.vue';
-import AboutTab from '@/components/SettingsDialog/tabs/AboutTab.vue';
-import LicensesTab from '@/components/SettingsDialog/tabs/LicensesTab.vue';
+import { SettingsTab } from '@/components/SettingsDialog/tabs/SettingsTab';
+import { AboutTab } from '@/components/SettingsDialog/tabs/AboutTab';
+import { LicensesTab } from '@/components/SettingsDialog/tabs/LicensesTab';
 
 type TabName =
     | 'settings'
