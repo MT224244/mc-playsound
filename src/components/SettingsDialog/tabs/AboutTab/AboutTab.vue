@@ -10,7 +10,7 @@
                 <div class="q-mt-xs">
                     <ExternalLinkButton
                         color="#a31f34"
-                        :label="`License: ${license}`"
+                        :label="`${license} License`"
                         :href="`${repository}/blob/master/LICENSE`"
                         class="q-mr-xs"
                     />
