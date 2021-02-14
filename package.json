@@ -6,12 +6,14 @@
     "repository": "https://github.com/MT224244/mc-playsound",
     "main": "background.js",
     "license": "MIT",
+    "private": true,
     "scripts": {
-        "lint": "vue-cli-service lint",
         "electron:build": "vue-cli-service electron:build",
         "electron:serve": "vue-cli-service electron:serve",
-        "postinstall": "electron-builder install-app-deps",
-        "postuninstall": "electron-builder install-app-deps"
+        "lint": "vue-cli-service lint",
+        "licenses": "license-checker --production --excludePrivatePackages --json --unknown --customPath licenseChecker.json --out public/licenses.json",
+        "postinstall": "electron-builder install-app-deps && yarn run licenses",
+        "postuninstall": "electron-builder install-app-deps && yarn run licenses"
     },
     "dependencies": {
         "@quasar/extras": "^1.0.0",
@@ -40,6 +42,7 @@
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-standard": "^4.0.0",
         "eslint-plugin-vue": "^6.2.2",
+        "license-checker": "^25.0.1",
         "node-sass": "^4.13.0",
         "sass-loader": "^8.0.2",
         "typescript": "^4.1.5",

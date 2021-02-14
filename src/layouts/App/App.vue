@@ -89,6 +89,14 @@ export default class App extends Vue {
 html, body {
     overflow: hidden;
 }
+
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: rgba(#fff, 0.1);
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(#fff, 0.3);
+}
 </style>
 
 <style lang="scss" scoped>
@@ -98,7 +106,6 @@ html, body {
     .drag-area {
         -webkit-app-region: drag;
         position: absolute;
-        // 上を若干空ける
         top: 3px;
         width: 100%;
         height: 22px;
