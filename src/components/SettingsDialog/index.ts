@@ -1,1 +1,1 @@
-export { default as SettingsDialog } from '@/components/SettingsDialog/SettingsDialog.vue';
+export { default as SettingsDialog } from './SettingsDialog.vue';

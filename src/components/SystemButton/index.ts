@@ -1,1 +1,1 @@
-export { default as SystemButton } from '@/components/SystemButton/SystemButton.vue';
+export { default as SystemButton } from './SystemButton.vue';

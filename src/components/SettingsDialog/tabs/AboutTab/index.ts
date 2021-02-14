@@ -1,1 +1,1 @@
-export { default as AboutTab } from '@/components/SettingsDialog/tabs/AboutTab/AboutTab.vue';
+export { default as AboutTab } from './AboutTab.vue';

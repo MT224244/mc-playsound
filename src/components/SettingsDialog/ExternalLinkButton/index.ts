@@ -1,1 +1,1 @@
-export { default as ExternalLinkButton } from '@/components/SettingsDialog/ExternalLinkButton/ExternalLinkButton.vue';
+export { default as ExternalLinkButton } from './ExternalLinkButton.vue';

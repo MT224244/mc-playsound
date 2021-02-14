@@ -1,1 +1,1 @@
-export { default as App } from '@/layouts/App/App.vue';
+export { default as App } from './App.vue';
