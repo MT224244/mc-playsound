@@ -1,6 +1,7 @@
-import { app, protocol, shell, BrowserWindow } from 'electron';
+import { app, protocol, shell, dialog, BrowserWindow } from 'electron';
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib';
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer';
+import path from 'path';
 
 import { IpcMain } from '@/main/IpcMain';
 
@@ -49,6 +50,19 @@ async function createWindow() {
 
     IpcMain.Handle('App_close', () => {
         win.destroy();
+    });
+
+    IpcMain.Handle('MCDirPicker_request-defaultMcDirPath', () => {
+        return path.join(app.getPath('appData'), '.minecraft');
+    });
+    IpcMain.Handle('MCDirPicker_open-dir-picker', (e, currentPath) => {
+        const dirs = dialog.showOpenDialogSync(win, {
+            properties: [
+                'openDirectory'
+            ],
+            defaultPath: currentPath
+        });
+        return dirs ? dirs[0] : undefined;
     });
 
     if (process.env.WEBPACK_DEV_SERVER_URL) {
