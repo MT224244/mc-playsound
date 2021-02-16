@@ -1,12 +1,20 @@
 <template>
     <div class="q-ma-md">
-        <q-input outlined label="Test Input"/>
+        <SelectVersion v-model="selectedVersion"/>
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-@Component
-export default class Home extends Vue {}
+import { SelectVersion } from '@/components/SelectVersion';
+
+@Component({
+    components: {
+        SelectVersion
+    }
+})
+export default class Home extends Vue {
+    public selectedVersion = '';
+}
 </script>

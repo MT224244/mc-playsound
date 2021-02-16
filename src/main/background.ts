@@ -1,6 +1,7 @@
 import { app, protocol, shell, dialog, BrowserWindow, NewWindowWebContentsEvent, IpcMainInvokeEvent } from 'electron';
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib';
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer';
+import { readdirSync, readFileSync } from 'fs';
 import path from 'path';
 
 import { IpcMain } from '@/main/IpcMain';
@@ -19,6 +20,10 @@ protocol.registerSchemesAsPrivileged([
         }
     }
 ]);
+
+const getDefaultMcDirPath = () => {
+    return path.join(app.getPath('appData'), '.minecraft');
+};
 
 // #region Electron.app events
 
@@ -103,10 +108,10 @@ const ipcMain_handleAppClose = () => {
 };
 
 const ipcMain_MCDirPickerRequestDefaultMcDirPath = () => {
-    return path.join(app.getPath('appData'), '.minecraft');
+    return getDefaultMcDirPath();
 };
 
-const ipcMain_MCDirPickerOpenDirPicker = (e: IpcMainInvokeEvent, currentPath: string) => {
+const ipcMain_MCDirPickerOpenDirPicker = (_e: IpcMainInvokeEvent, currentPath: string) => {
     const dirs = dialog.showOpenDialogSync(win, {
         properties: [
             'openDirectory'
@@ -115,6 +120,35 @@ const ipcMain_MCDirPickerOpenDirPicker = (e: IpcMainInvokeEvent, currentPath: st
     });
 
     return dirs ? dirs[0] : undefined;
+};
+
+const ipcMain_SelectVersionRequestVersions = (_e: IpcMainInvokeEvent, mcDirPath?: string) => {
+    try {
+        const mcDir = mcDirPath || getDefaultMcDirPath();
+
+        const indexesPath = path.join(mcDir, 'assets/indexes');
+        const fileNames = readdirSync(indexesPath).filter(x => /.*\.json$/.test(x));
+
+        const versions: string[] = [];
+        for (const fileName of fileNames) {
+            try {
+                const filePath = path.join(mcDir, 'assets/indexes', fileName);
+                const obj = JSON.parse(readFileSync(filePath, 'utf-8'));
+
+                if (obj.objects) {
+                    versions.push(path.basename(fileName, '.json'));
+                }
+            }
+            catch (err) {
+                console.log(err.message);
+            }
+        }
+
+        return versions;
+    }
+    catch {
+        return undefined;
+    }
 };
 
 // #endregion
@@ -143,6 +177,8 @@ const createWindow = async () => {
 
     IpcMain.Handle('MCDirPicker_request-defaultMcDirPath', ipcMain_MCDirPickerRequestDefaultMcDirPath);
     IpcMain.Handle('MCDirPicker_open-dir-picker', ipcMain_MCDirPickerOpenDirPicker);
+
+    IpcMain.Handle('SelectVersion_request-versions', ipcMain_SelectVersionRequestVersions);
 
     if (process.env.WEBPACK_DEV_SERVER_URL) {
         // Load the url of the dev server if in development mode

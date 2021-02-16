@@ -26,6 +26,13 @@ type IpcIHArgs = {
         ];
         return?: string;
     };
+
+    'SelectVersion_request-versions': {
+        args: [
+            mcDirPath?: string
+        ];
+        return?: string[];
+    };
 };
 
 /**
