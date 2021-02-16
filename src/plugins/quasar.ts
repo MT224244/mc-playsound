@@ -9,7 +9,11 @@ import '@quasar/extras/mdi-v5/mdi-v5.css';
 import '@/styles/quasar.scss';
 
 Vue.use(Quasar, {
-    config: {},
+    config: {
+        brand: {
+            primary: '#477fed'
+        }
+    },
     plugins: {
         Notify,
         LocalStorage
