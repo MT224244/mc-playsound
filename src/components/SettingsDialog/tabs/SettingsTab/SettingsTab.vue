@@ -61,7 +61,6 @@ export default class SettingsTab extends Vue {
                 opacity: 0
             }
         });
-        console.log(this.mcDirPath);
     }
 }
 </script>
