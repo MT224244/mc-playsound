@@ -12,7 +12,7 @@
                 <SearchBox
                     class="q-ml-sm"
                     v-model="searchText"
-                    @input="searchBox_onInput"
+                    @input="search"
                 />
             </div>
         </div>
@@ -47,25 +47,32 @@ export default class Home extends Vue {
     public searchText: string | null = '';
 
     public sounds: SoundData[] = [];
+    private allSounds: SoundData[] = [];
+
     public selectedSound: SoundData | null = null;
+
+    /**
+     * Narrow down the list of sounds.
+     */
+    private search() {
+        this.sounds = this.allSounds.filter(x => {
+            return (x.soundEvent || 'unknown').includes(this.searchText || '');
+        });
+    }
 
     public selectVersion_onInput() {
         this.selectedSound = null;
         this.sounds = [];
 
         IpcRenderer.Invoke('Home_request-sounds', this.selectedVersion).then(sounds => {
-            this.sounds = sounds || [];
+            this.allSounds = sounds || [];
+            this.search();
         });
     }
 
     public soundList_onDblClick() {
         // TODO: Write the processing of play a sound.
         console.log(this.selectedSound);
-    }
-
-    public searchBox_onInput() {
-        // TODO: Write the processing when value changed.
-        console.log(this.searchText);
     }
 }
 </script>
