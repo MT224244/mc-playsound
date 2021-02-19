@@ -1,4 +1,34 @@
 /**
+ * Minecraftのバージョン毎にリソースへのパスが記されたJsonファイルの形式
+ */
+type McVersionJson = {
+    objects: {
+        [key: string]: {
+            hash: string;
+            size: number;
+        }
+    }
+};
+
+/**
+ * sounds.json
+ */
+type McSoundsJson = {
+    [key: string]: {
+        sounds: (string | {
+            name: string;
+        })[];
+        subtitle?: string;
+    }
+};
+
+type SoundData = {
+    soundEvent?: string;
+    name: string;
+    hash: string;
+};
+
+/**
  * IPC通信の引数定義\
  * Invoke, Handle用
  */
@@ -32,6 +62,14 @@ type IpcIHArgs = {
             mcDirPath?: string
         ];
         return?: string[];
+    };
+
+    'Home_request-sounds': {
+        args: [
+            versionName: string,
+            mcDirPath?: string
+        ];
+        return?: SoundData[];
     };
 };
 

@@ -133,7 +133,7 @@ const ipcMain_SelectVersionRequestVersions = (_e: IpcMainInvokeEvent, mcDirPath?
         for (const fileName of fileNames) {
             try {
                 const filePath = path.join(mcDir, 'assets/indexes', fileName);
-                const obj = JSON.parse(readFileSync(filePath, 'utf-8'));
+                const obj: McVersionJson = JSON.parse(readFileSync(filePath, 'utf-8'));
 
                 if (obj.objects) {
                     versions.push(path.basename(fileName, '.json'));
@@ -145,6 +145,53 @@ const ipcMain_SelectVersionRequestVersions = (_e: IpcMainInvokeEvent, mcDirPath?
         }
 
         return versions;
+    }
+    catch {
+        return undefined;
+    }
+};
+
+const ipcMain_HomeRequestSounds = (_e: IpcMainInvokeEvent, versionName: string, mcDirPath?: string) => {
+    try {
+        const mcDir = mcDirPath || getDefaultMcDirPath();
+
+        const versionJsonPath = path.join(mcDir, 'assets/indexes', `${versionName}.json`);
+        const { objects }: McVersionJson = JSON.parse(readFileSync(versionJsonPath, 'utf-8'));
+
+        const result: SoundData[] = [];
+
+        // sounds.json
+        const soundsJsonKey = Object.keys(objects).find(x => /.*\/?sounds.json$/.test(x));
+        const soundNames: { [key: string]: string } = {};
+        if (soundsJsonKey) {
+            const { hash } = objects[soundsJsonKey];
+            const soundsJsonPath = path.join(mcDir, 'assets/objects', hash.slice(0, 2), hash);
+            const soundsJson: McSoundsJson = JSON.parse(readFileSync(soundsJsonPath, 'utf-8'));
+
+            for (const soundEvent of Object.keys(soundsJson)) {
+                for (const sound of soundsJson[soundEvent].sounds) {
+                    const name = (typeof sound === 'string')
+                        ? sound
+                        : sound.name;
+
+                    soundNames[name] = soundEvent;
+                }
+            }
+        }
+
+        for (const key of Object.keys(objects).filter(x => /.*\.ogg$/.test(x))) {
+            // 1.7.10~ minecraft/sounds/[name].ogg
+            // 1.7.4   sounds/[name].ogg
+            // legacy  sound/[name].ogg
+            const n = key.replace(/^(?:minecraft\/)?(?:sounds?\/)?(.*)\.ogg$/, '$1');
+            result.push({
+                soundEvent: soundNames[n] || undefined,
+                name: key,
+                hash: objects[key].hash
+            });
+        }
+
+        return result;
     }
     catch {
         return undefined;
@@ -179,6 +226,8 @@ const createWindow = async () => {
     IpcMain.Handle('MCDirPicker_open-dir-picker', ipcMain_MCDirPickerOpenDirPicker);
 
     IpcMain.Handle('SelectVersion_request-versions', ipcMain_SelectVersionRequestVersions);
+
+    IpcMain.Handle('Home_request-sounds', ipcMain_HomeRequestSounds);
 
     if (process.env.WEBPACK_DEV_SERVER_URL) {
         // Load the url of the dev server if in development mode
