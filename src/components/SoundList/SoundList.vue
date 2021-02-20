@@ -57,7 +57,7 @@ export default class SoundList extends Vue {
     background-color: rgba(white, 0.03);
     .q-item--active {
         color: white;
-        background-color: rgba($primary, 0.3);
+        background-color: rgba($blue-6, 0.4);
     }
     .sound-name {
         color: rgba(white, 0.4);
