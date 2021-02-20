@@ -64,6 +64,13 @@ type IpcIHArgs = {
         return?: string[];
     };
 
+    'CommandGenerator_write-clipboard': {
+        args: [
+            text: string
+        ];
+        return: void;
+    };
+
     'Home_request-sounds': {
         args: [
             versionName: string,

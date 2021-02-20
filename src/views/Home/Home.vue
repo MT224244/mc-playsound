@@ -39,6 +39,14 @@
                 />
             </div>
         </div>
+        <div class="q-mt-sm q-mx-md">
+            <CommandGenerator
+                :version="selectedVersion"
+                :soundEvent="selectedSound && selectedSound.soundEvent"
+                :volume="volume"
+                :pitch="pitch"
+            />
+        </div>
     </div>
 </template>
 
@@ -53,6 +61,7 @@ import { SoundList } from '@/components/SoundList';
 import { VolumeSlider } from '@/components/VolumeSlider';
 import { PitchSlider } from '@/components/PitchSlider';
 import { LoopSwitch } from '@/components/LoopSwitch';
+import { CommandGenerator } from '@/components/CommandGenerator';
 
 @Component({
     components: {
@@ -61,7 +70,8 @@ import { LoopSwitch } from '@/components/LoopSwitch';
         SoundList,
         VolumeSlider,
         PitchSlider,
-        LoopSwitch
+        LoopSwitch,
+        CommandGenerator
     }
 })
 export default class Home extends Vue {
@@ -108,7 +118,6 @@ export default class Home extends Vue {
 
 <style lang="scss" scoped>
 .sound-list {
-    // TODO: Temporary value.
-    height: 55vh;
+    height: calc(100vh - 25px - 248px);
 }
 </style>

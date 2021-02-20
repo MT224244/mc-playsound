@@ -1,4 +1,4 @@
-import { app, protocol, shell, dialog, BrowserWindow, NewWindowWebContentsEvent, IpcMainInvokeEvent } from 'electron';
+import { app, protocol, shell, dialog, clipboard, BrowserWindow, NewWindowWebContentsEvent, IpcMainInvokeEvent } from 'electron';
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib';
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer';
 import { readdirSync, readFileSync } from 'fs';
@@ -151,6 +151,10 @@ const ipcMain_SelectVersionRequestVersions = (_e: IpcMainInvokeEvent, mcDirPath?
     }
 };
 
+const ipcMain_CommandGeneratorWriteClipboard = (_e: IpcMainInvokeEvent, text: string) => {
+    clipboard.writeText(text);
+};
+
 const ipcMain_HomeRequestSounds = (_e: IpcMainInvokeEvent, versionName: string, mcDirPath?: string) => {
     try {
         const mcDir = mcDirPath || getDefaultMcDirPath();
@@ -226,6 +230,8 @@ const createWindow = async () => {
     IpcMain.Handle('MCDirPicker_open-dir-picker', ipcMain_MCDirPickerOpenDirPicker);
 
     IpcMain.Handle('SelectVersion_request-versions', ipcMain_SelectVersionRequestVersions);
+
+    IpcMain.Handle('CommandGenerator_write-clipboard', ipcMain_CommandGeneratorWriteClipboard);
 
     IpcMain.Handle('Home_request-sounds', ipcMain_HomeRequestSounds);
 
