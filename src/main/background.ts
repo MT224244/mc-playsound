@@ -155,6 +155,19 @@ const ipcMain_CommandGeneratorWriteClipboard = (_e: IpcMainInvokeEvent, text: st
     clipboard.writeText(text);
 };
 
+const ipcMain_SoundRequestSoundFileBuf = (_e: IpcMainInvokeEvent, hash: string, mcDirPath?: string) => {
+    try {
+        const mcDir = mcDirPath || getDefaultMcDirPath();
+
+        const soundFilePath = path.join(mcDir, 'assets/objects', hash.slice(0, 2), hash);
+
+        return readFileSync(soundFilePath);
+    }
+    catch {
+        return undefined;
+    }
+};
+
 const ipcMain_HomeRequestSounds = (_e: IpcMainInvokeEvent, versionName: string, mcDirPath?: string) => {
     try {
         const mcDir = mcDirPath || getDefaultMcDirPath();
@@ -232,6 +245,8 @@ const createWindow = async () => {
     IpcMain.Handle('SelectVersion_request-versions', ipcMain_SelectVersionRequestVersions);
 
     IpcMain.Handle('CommandGenerator_write-clipboard', ipcMain_CommandGeneratorWriteClipboard);
+
+    IpcMain.Handle('Sound_request-sound-file-buf', ipcMain_SoundRequestSoundFileBuf);
 
     IpcMain.Handle('Home_request-sounds', ipcMain_HomeRequestSounds);
 

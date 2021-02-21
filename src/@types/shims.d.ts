@@ -71,6 +71,14 @@ type IpcIHArgs = {
         return: void;
     };
 
+    'Sound_request-sound-file-buf': {
+        args: [
+            hash: string,
+            mcDirPath?: string
+        ];
+        return?: Buffer;
+    };
+
     'Home_request-sounds': {
         args: [
             versionName: string,
