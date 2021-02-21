@@ -72,7 +72,17 @@ export default class CommandGenerator extends Vue {
         const command = this.generateCommand;
         if (!command) return;
 
-        IpcRenderer.Invoke('CommandGenerator_write-clipboard', command);
+        IpcRenderer.Invoke('CommandGenerator_write-clipboard', command).then(() => {
+            this.$q.notify({
+                type: 'info',
+                message: 'copied the command.',
+                position: 'bottom-right',
+                timeout: 800,
+                badgeStyle: {
+                    opacity: 0
+                }
+            });
+        });
     }
 }
 </script>
