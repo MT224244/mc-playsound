@@ -1,5 +1,5 @@
 <template>
-    <q-layout view="lHh Lpr lFf">
+    <q-layout>
         <q-bar class="q-px-none fixed-top titlebar">
             <div class="drag-area"/>
             <span class="q-pl-sm text-subtitle2">{{ title }} v{{ version }}</span>
@@ -88,6 +88,10 @@ export default class App extends Vue {
 <style lang="scss">
 html, body {
     overflow: hidden;
+}
+
+* {
+    user-select: none;
 }
 
 ::-webkit-scrollbar {
