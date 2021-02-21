@@ -1,10 +1,12 @@
 # MC Playsound
 
 [![License_Badge][]][License]
-<!-- [![CI_Badge][]][CI] -->
-<!-- ![Version_Badge][] -->
+[![CI_Badge][]][CI]
+![Version_Badge][]
 
 This application play sound used in Minecraft.
+
+![](https://user-images.githubusercontent.com/25514849/108615497-34f6f800-7448-11eb-8168-2672b95fe4a5.png)
 
 ## License
 
@@ -17,4 +19,4 @@ This application play sound used in Minecraft.
 [Version_Badge]: https://img.shields.io/github/package-json/v/MT224244/mc-playsound
 
 [License]:./LICENSE
-[CI]: https://github.com/TheSkyBlock/tsb-serverchat/actions?query=workflow%3ACI
+[CI]: https://github.com/MT224244/mc-playsound/actions
