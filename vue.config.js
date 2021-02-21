@@ -16,6 +16,9 @@ module.exports = {
                         'zip',
                         'nsis'
                     ]
+                },
+                nsis: {
+                    oneClick: false
                 }
             }
         }
