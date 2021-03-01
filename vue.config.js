@@ -10,6 +10,10 @@ module.exports = {
             builderOptions: {
                 appId: 'com.mt224244.mc-playsound',
                 productName: 'MC Playsound',
+                mac: {
+                    icon: 'public/icon-mac.png',
+                    target: "zip"
+                },
                 win: {
                     icon: 'public/icon.ico',
                     target: [
