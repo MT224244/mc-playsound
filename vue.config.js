@@ -12,7 +12,13 @@ module.exports = {
                 productName: 'MC Playsound',
                 mac: {
                     icon: 'public/icon-mac.png',
-                    target: "zip"
+                    target: {
+                        target: 'default',
+                        arch: [
+                            'x64',
+                            'arm64'
+                        ]
+                    }
                 },
                 win: {
                     icon: 'public/icon.ico',

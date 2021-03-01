@@ -1,7 +1,7 @@
 {
     "name": "mc-playsound",
     "description": "This application play sound used in Minecraft.",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "author": "MT224244",
     "repository": "https://github.com/MT224244/mc-playsound",
     "main": "background.js",
