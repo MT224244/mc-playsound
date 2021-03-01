@@ -3,6 +3,7 @@ import { createProtocol } from 'vue-cli-plugin-electron-builder/lib';
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer';
 import { readdirSync, readFileSync } from 'fs';
 import path from 'path';
+import os from 'os';
 
 import { IpcMain } from '@/main/IpcMain';
 
@@ -22,7 +23,12 @@ protocol.registerSchemesAsPrivileged([
 ]);
 
 const getDefaultMcDirPath = () => {
-    return path.join(app.getPath('appData'), '.minecraft');
+    let dirName:string = '.minecraft'
+    // Mac OS
+    if (os.type().toString().match('Darwin')){
+        dirName = 'minecraft'
+    }
+    return path.join(app.getPath('appData'), dirName);
 };
 
 // #region Electron.app events
