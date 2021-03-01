@@ -13,8 +13,11 @@ module.exports = {
                 mac: {
                     icon: 'public/icon-mac.png',
                     target: {
-                        target: "default",
-                        arch: ['x64', 'arm64']
+                        target: 'default',
+                        arch: [
+                            'x64',
+                            'arm64'
+                        ]
                     }
                 },
                 win: {

@@ -23,11 +23,13 @@ protocol.registerSchemesAsPrivileged([
 ]);
 
 const getDefaultMcDirPath = () => {
-    let dirName:string = '.minecraft'
+    let dirName = '.minecraft';
+
     // Mac OS
-    if (os.type().toString().match('Darwin')){
-        dirName = 'minecraft'
+    if (os.type().toString().match('Darwin')) {
+        dirName = 'minecraft';
     }
+
     return path.join(app.getPath('appData'), dirName);
 };
 
